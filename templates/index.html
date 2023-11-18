@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<style>
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+      background-color: #3c455a;
+      font-family: 'Khula', sans-serif;
+      font-weight: 300;
+      color: white;
+      line-height: 1em;
+      margin: 0;
+      padding: 2em 1em;
+}
+         
+</style>    
+<head>
+    <title> Sales Forecasting </title>
+</head>
+
+<body>
+    <div>
+        <h1> Sales Forecasting </h1>
+        <form method="post" enctype=multipart/form-data action = "/">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for ="sales_data"> Sales Data:</label></td>
+                        <td><input type="file" name="sales_data" accept=".csv"><br></td>
+                        <td><input class="submit-button" type="submit" value="Upload"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <p style="color:red"> File Format: .csv (columns: date,sales (min 30 days))</p>
+        <p> Hasil Prediksi: </p>
+        <div id='chart' class='chart'></div>
+    </div>
+</body>
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'> 
+  var graphs = {{graphJSON | safe}};
+  Plotly.plot('chart',graphs,{});
+</script>
+</html>
