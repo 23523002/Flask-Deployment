@@ -20,6 +20,7 @@ scaler = load(open(scaler_file, 'rb'))
 @app.route('/', methods=['GET', 'POST'])
 def index():
     predicted_sales = []
+    tables = []
     if request.method == 'POST':
         sales_data = request.files.get('sales_data')
         # input data
@@ -69,13 +70,11 @@ def index():
         df_pred.index = df_pred.index + timedelta(days=60)
         df_pred['sales'] = predicted_sales
 
-        # Create line chart
-        fig = px.line(df_pred, x=df_pred.index, y='sales')
+        # Convert to html table
+        test_series = test_series.reset_index(drop=True)
+        tables=[test_series.round(2).to_html(classes='data', header="true")]
 
-        # Create graphJSON
-        graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
-    return render_template('index.html', graphJSON = graphJSON)
+    return render_template('index.html', TABLES = tables)
 
 if __name__ == '__main__':
     # run the application on a local development server
