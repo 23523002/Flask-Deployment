@@ -19,7 +19,6 @@ body {
 <head>
     <title> Sales Forecasting </title>
 </head>
-
 <body>
     <div>
         <h1> Sales Forecasting </h1>
@@ -35,13 +34,12 @@ body {
             </table>
         </form>
         <p style="color:red"> File Format: .csv (columns: date,sales (min 30 days))</p>
-        <p> Hasil Prediksi: </p>
-        <div id='chart' class='chart'></div>
+        <p> Data Uji: </p>
+        <ul>
+            {% for table in TABLES %}
+            {{table|safe}}
+            {% endfor %}
+        </ul>
     </div>
 </body>
-<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-<script type='text/javascript'> 
-  var graphs = {{graphJSON | safe}};
-  Plotly.plot('chart',graphs,{});
-</script>
 </html>
